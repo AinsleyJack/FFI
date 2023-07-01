@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Auth from './Auth';
+import { Button } from '@mui/material';
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
+
+    try {
+      const response = await Auth.login(email, password);
+      // Realizar acciones adicionales después de la autenticación exitosa, como guardar el token de acceso en el almacenamiento local.
+    } catch (error) {
+      setError('Error de autenticación. Verifica tus credenciales.');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      
+      <Button variant="contained" color="primary">
+        Mi botón MUI
+      </Button>
       <label>
         Email:
         <input
@@ -30,6 +42,7 @@ const LoginForm = () => {
         />
       </label>
       <br />
+      {error && <p>{error}</p>}
       <button type="submit">Login</button>
     </form>
   );
