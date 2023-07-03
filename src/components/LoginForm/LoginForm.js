@@ -2,23 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Auth from './Auth';
 import { Grid } from '@mui/material';
 import { makeStyles } from '@material-ui/core/styles';
+import fondo from '/MYR.jpg';
 
+const useStyles = makeStyles((theme) => ({
+  // Estilos CSS personalizados
+  root: {
+    backgroundImage: `url(${fondo})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+}));
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
-  const useStyles = makeStyles((theme) => ({
-    // Estilos CSS personalizados
-    root: {
-      backgroundImage: 'url("ruta/a/la/imagen.jpg")',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      height: '100vh',
-    },
-  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +30,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={useStyles.root}>
       <label>
         Email:
         <input
