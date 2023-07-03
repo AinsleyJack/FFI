@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import Auth from './Auth';
-import { Button } from '@mui/material';
+import { Grid } from '@mui/material';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const useStyles = makeStyles((theme) => ({
+    // Estilos CSS personalizados
+    root: {
+      backgroundImage: 'url("ruta/a/la/imagen.jpg")',
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center',
+      height: '100vh',
+    },
+  }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +33,6 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      
-      <Button variant="contained" color="primary">
-        Mi botón MUI
-      </Button>
       <label>
         Email:
         <input
