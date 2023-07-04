@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Auth from "./Auth";
-import { Grid, Container, Paper, Avatar } from "@mui/material";
+import {  Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import {LockOutlined as LockOutlinedIcon} from '@material-ui/icons'
 import fondo from "./MYR-0113-JHO-2048x1363.jpg";
@@ -25,12 +25,23 @@ const useStyles = makeStyles((theme) => ({
       height: "100%",
     },
   },
-  form: {
+  div: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
+  avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.primary.main,
+	},
+	form: {
+		width: '100%',
+		marginTop: theme.spacing(1)
+	},
+	button: {
+		margin: theme.spacing(3, 0, 2)
+	}
 }));
 
 const LoginForm = () => {
@@ -45,6 +56,7 @@ const LoginForm = () => {
     try {
       const response = await Auth.login(email, password);
       // Realizar acciones adicionales después de la autenticación exitosa, como guardar el token de acceso en el almacenamiento local.
+      console.log(response);
     } catch (error) {
       setError("Error de autenticación. Verifica tus credenciales.");
     }
@@ -52,37 +64,55 @@ const LoginForm = () => {
 
   return (
     <Grid container component="main" className={classes.root}>
+      <CssBaseline />
       <Container
         component={Paper}
         elevation={5}
         maxWidth="xs"
         className={classes.container}
       >
-        <form onSubmit={handleSubmit} className={classes.form}>
-          <Avatar>
+         <div className={classes.div}>
+         <Avatar className={classes.avatar}>
                <LockOutlinedIcon/>
           </Avatar>
-          <label>
-            Email:
-            <input
-              type="email"
+          <Typography component='h1' variant='h5'>Sign In</Typography>
+         <form onSubmit={handleSubmit}  className={classes.form}>
+         <TextField
+							fullWidth
+							autoFocus
+							color='primary'
+							margin='normal'
+							variant='outlined'
+							label='Email'
+							name='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
+						/>
           <br />
-          <label>
-            Password:
-            <input
-              type="password"
+          <TextField
+							fullWidth
+							type='password'
+							color='primary'
+							margin='normal'
+							variant='outlined'
+							label='Password'
+							name='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+						/>
           <br />
           {error && <p>{error}</p>}
-          <button type="submit">Login</button>
+          <Button
+							fullWidth
+							variant='contained'
+							color='primary'
+              type="submit"
+							className={classes.button}
+						>
+							Sign In
+						</Button>
         </form>
+         </div>
       </Container>
     </Grid>
   );

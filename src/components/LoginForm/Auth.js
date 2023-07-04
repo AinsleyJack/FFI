@@ -5,7 +5,7 @@ class Auth {
       return new Promise((resolve, reject) => {
         // Simulación de autenticación exitosa después de 1 segundo
         setTimeout(() => {
-          if (email === 'example@example.com' && password === 'password') {
+          if (email === 'chuete@gmail.com' && password === '123') {
             resolve({ token: 'abc123' }); // Por ejemplo, puedes retornar un token de acceso
           } else {
             reject(new Error('Error de autenticación'));
