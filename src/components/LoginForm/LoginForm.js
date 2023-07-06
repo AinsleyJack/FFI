@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   container: {
-    opacity: "0.6",
+    opacity: "0.8",
     height: "60%",
     marginTop: theme.spacing(10),
     [theme.breakpoints.down(400 + theme.spacing(2) + 2)]: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.primary.main,
+		//backgroundColor: theme.palette.primary.main 
 	},
 	form: {
 		width: '100%',
@@ -49,6 +49,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const classes = useStyles();
+  const AvatarStyle = {backgroundColor:'#00472e'}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,13 +73,14 @@ const LoginForm = () => {
         className={classes.container}
       >
          <div className={classes.div}>
-         <Avatar className={classes.avatar}>
+         <Avatar className={classes.avatar} style={AvatarStyle}>
                <LockOutlinedIcon/>
           </Avatar>
           <Typography component='h1' variant='h5'>Sign In</Typography>
          <form onSubmit={handleSubmit}  className={classes.form}>
          <TextField
 							fullWidth
+              required
 							autoFocus
 							color='primary'
 							margin='normal'
@@ -91,6 +93,7 @@ const LoginForm = () => {
           <br />
           <TextField
 							fullWidth
+              required
 							type='password'
 							color='primary'
 							margin='normal'
