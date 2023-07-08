@@ -135,11 +135,11 @@ export const Navbar = () => {
         </Box>
 
         <NavbarLinksBox>
-          <NavLink variant="body2">Home</NavLink>
-          <NavLink variant="body2">Features</NavLink>
-          <NavLink variant="body2">Services</NavLink>
-          <NavLink variant="body2">Listed</NavLink>
-          <NavLink variant="body2">Contact</NavLink>
+          <NavLink variant="body2">Inicio</NavLink>
+          <NavLink variant="body2">Noticia</NavLink>
+          <NavLink variant="body2">Servicios</NavLink>
+          <NavLink variant="body2">listado</NavLink>
+          <NavLink variant="body2">Contacto</NavLink>
         </NavbarLinksBox>
       </Box>
 
@@ -151,11 +151,11 @@ export const Navbar = () => {
           gap: "1rem",
         }}
       >
-        <NavLink variant="body2">Sign Up</NavLink>
+        <NavLink variant="body2">Login</NavLink>
         <CustomButton
           backgroundColor="#0F1B4C"
           color="#fff"
-          buttonText="Register"
+          buttonText="Registrate"
         />
       </Box>
     </NavbarContainer>
