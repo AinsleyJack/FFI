@@ -7,44 +7,52 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
 
+// Temporal
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
+
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
-
+  // temporal
+  const currentDate = new Date();
+  const MES = format(currentDate, 'MMMM', { locale: es });
+  const YEAR = format(currentDate, 'yyyy'); 
+  const DIA2 = format(currentDate, 'ee'); 
 const rows = [
   createData(
     0,
-    '16 Mar, 2019',
+    `${DIA2} ${MES}, ${YEAR}`,
     'Elvis Presley',
-    'Tupelo, MS',
+    'Chinandega',
     'VISA ⠀•••• 3719',
-    312.44,
+    31,
   ),
   createData(
     1,
-    '16 Mar, 2019',
+    `${DIA2} ${MES}, ${YEAR}`,
     'Paul McCartney',
-    'London, UK',
+    'León',
     'VISA ⠀•••• 2574',
-    866.99,
+    86,
   ),
-  createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
+  createData(2, `${DIA2} ${MES}, ${YEAR}`, 'Tom Scholz', 'Carazo', 'MC ⠀•••• 1253', 10),
   createData(
     3,
-    '16 Mar, 2019',
+    `${DIA2} ${MES}, ${YEAR}`,
     'Michael Jackson',
-    'Gary, IN',
+    'Managua',
     'AMEX ⠀•••• 2000',
-    654.39,
+    65,
   ),
   createData(
     4,
-    '15 Mar, 2019',
+    `${DIA2} ${MES}, ${YEAR}`,
     'Bruce Springsteen',
-    'Long Branch, NJ',
+    'Rivas',
     'VISA ⠀•••• 5919',
-    212.79,
+    21,
   ),
 ];
 
@@ -55,15 +63,15 @@ function preventDefault(event) {
 export default function Orders() {
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Encuestas Recientes</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Fecha</TableCell>
+            <TableCell>Nombre</TableCell>
+            <TableCell>Departamento</TableCell>
+            <TableCell>Encuestas</TableCell>
+            <TableCell align="right">Numero de Encuestas</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -72,14 +80,18 @@ export default function Orders() {
               <TableCell>{row.date}</TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+              <TableCell>
+              <Link color='#709a08' href="#"   sx={{ mt: 3 }}>
+              Ver  
+              </Link>
+                </TableCell>
+              <TableCell align="right">{`${row.amount}`}</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Link color='#709a08' href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more orders
+        Ver Mas Encuestas
       </Link>
     </React.Fragment>
   );
