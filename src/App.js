@@ -3,15 +3,19 @@ import LoginForm from './components/LoginForm/LoginForm';
 import Hero from './components/Hero';
 import Footer from './components/Footer'
 import Dashboard from './components/dashboard/DashBoard';
+import UserList from "./components/AdminUser/UserList";
+import UserForm from "./components/AdminUser/UserForm";
 
 
 function App() {
   return (
     <  >
     <Dashboard></Dashboard>
-    <LoginForm></LoginForm>
-    <Hero></Hero>
-    <Footer></Footer>
+      <UserList />
+      <UserForm />
+      <LoginForm></LoginForm>
+      <Hero></Hero>
+      <Footer></Footer>
     </ >
   );
 }
