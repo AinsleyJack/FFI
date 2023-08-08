@@ -17,10 +17,14 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { MainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import UserList from "../AdminUser/UserList";
+import UserForm from "../AdminUser/UserForm";
+import { Contexto } from '../../Contexto/Contexto';
+import { useContext } from 'react';
 
 function Copyright(props) {
   return (
@@ -35,7 +39,8 @@ function Copyright(props) {
   );
 }
 
-const drawerWidth = 240;
+
+const drawerWidth = 260;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -84,7 +89,87 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
+// componenetes 
+
+// Dashboard
+
+const Dashboards = () => (
+  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+  <Grid container spacing={3}>
+    {/* Chart */}
+    <Grid item xs={12} md={8} lg={9}>
+      <Paper
+        sx={{
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          height: 240,
+        }}
+      >
+        <Chart />
+      </Paper>
+    </Grid>
+    {/* Recent Deposits */}
+    <Grid item xs={12} md={4} lg={3}>
+      <Paper
+        sx={{
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          height: 240,
+        }}
+      >
+        <Deposits />
+      </Paper>
+    </Grid>
+    {/* Recent Orders */}
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <Orders />
+      </Paper>
+    </Grid>
+  </Grid>
+  <Copyright sx={{ pt: 4 }} />
+</Container>
+  
+);
+
+// Usuarios
+const ListUser = () => (
+  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+  <Grid container spacing={3}>
+    {/* List User */}
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <UserList />
+      </Paper>
+    </Grid>
+  </Grid>
+  <Copyright sx={{ pt: 4 }} />
+</Container>
+  
+);
+
+// crear Usuarios
+const CreateListUser = () => (
+  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+  <Grid container spacing={3}>
+    {/* List User */}
+    <Grid item xs={12}>
+      <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <UserForm />
+      </Paper>
+    </Grid>
+  </Grid>
+  <Copyright sx={{ pt: 4 }} />
+</Container>
+  
+);
+
+
+
 export default function Dashboard() {
+  const {info}   = useContext(Contexto);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -144,7 +229,7 @@ export default function Dashboard() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {<MainListItems />}
             <Divider sx={{ my: 1 }} />
             {secondaryListItems}
           </List>
@@ -162,9 +247,12 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        {info === 0 ? <Dashboards/> : info === 1 ? <ListUser/> : <CreateListUser/>}
+           
+           {/*
+                     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
+              
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -177,7 +265,7 @@ export default function Dashboard() {
                   <Chart />
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
+              
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -190,7 +278,7 @@ export default function Dashboard() {
                   <Deposits />
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
+             
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                   <Orders />
@@ -199,6 +287,7 @@ export default function Dashboard() {
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
+           */}
         </Box>
       </Box>
     </ThemeProvider>

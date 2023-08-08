@@ -4,6 +4,7 @@ import {  Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBase
 import { makeStyles } from "@material-ui/core/styles";
 import {LockOutlined as LockOutlinedIcon} from '@material-ui/icons'
 import fondo from "./MYR-0113-JHO-2048x1363.jpg";
+import { useNavigate  } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   // Estilos CSS personalizados
@@ -51,6 +52,7 @@ const LoginForm = () => {
   const classes = useStyles();
   const AvatarStyle = {backgroundColor:'#00472e'}
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,6 +60,9 @@ const LoginForm = () => {
       const response = await Auth.login(email, password);
       // Realizar acciones adicionales después de la autenticación exitosa, como guardar el token de acceso en el almacenamiento local.
       console.log(response);
+      if (response.token = "abc123"){
+        navigate('/Dashboard');
+      }
     } catch (error) {
       setError("Error de autenticación. Verifica tus credenciales.");
     }

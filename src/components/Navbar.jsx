@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { LinkOffTwoTone } from "@mui/icons-material";
+import { useNavigate  } from 'react-router-dom';
 
 export const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState({
@@ -111,6 +112,11 @@ export const Navbar = () => {
       display: "none",
     },
   }));
+  const navigate = useNavigate();
+
+  const LoginClick = () => {
+    navigate('/Login');
+  };
 
   return (
     <NavbarContainer>
@@ -151,7 +157,8 @@ export const Navbar = () => {
           gap: "1rem",
         }}
       >
-        <NavLink variant="body2">Login</NavLink>
+        <NavLink onClick={LoginClick} variant="body2">Login</NavLink>
+        
         <CustomButton
           backgroundColor="#0F1B4C"
           color="#fff"
