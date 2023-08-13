@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Auth from "./Auth";
 import {  Grid, Container, Paper, Avatar, Typography, TextField, Button, CssBaseline } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
@@ -50,7 +50,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const classes = useStyles();
-  const AvatarStyle = {backgroundColor:'#00472e'}
+  const AvatarStyle = {backgroundColor:'#00472e'};
 
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -60,11 +60,11 @@ const LoginForm = () => {
       const response = await Auth.login(email, password);
       // Realizar acciones adicionales después de la autenticación exitosa, como guardar el token de acceso en el almacenamiento local.
       console.log(response);
-      if (response.token = "abc123"){
+      if (response.token === "abc123"){
         navigate('/Dashboard');
       }
-    } catch (error) {
-      setError("Error de autenticación. Verifica tus credenciales.");
+    } catch (error2) {
+      setError("Error de autenticación. Verifica tus credenciales." );
     }
   };
 

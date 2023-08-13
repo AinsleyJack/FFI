@@ -4,14 +4,10 @@ import Hero from './components/Hero';
 import Footer from './components/Footer'
 import Dashboard from './components/dashboard/DashBoard';
 import { Datos } from './Contexto/Contexto';
-import UserList from "./components/AdminUser/UserList";
-import UserForm from "./components/AdminUser/UserForm";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  NavLink
 } from "react-router-dom";
 
 
