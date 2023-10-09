@@ -23,8 +23,7 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import UserList from "../AdminUser/UserList";
 import UserForm from "../AdminUser/UserForm";
-import { Contexto } from '../../Contexto/Contexto';
-import { useContext } from 'react';
+import { useContexto } from '../../Contexto/Contexto';
 
 function Copyright(props) {
   return (
@@ -166,10 +165,27 @@ const CreateListUser = () => (
   
 );
 
+const RenderContent = () => {
+  const {info}   = useContexto();
+  const DASHBOARDS = 0;
+  const LIST_USER = 1;
+  const CREATE_LIST_USER = 2;
+  
 
+  switch (info) {
+    case DASHBOARDS:
+      return <Dashboards />;
+    case LIST_USER:
+      return <ListUser />;
+    case CREATE_LIST_USER:
+      return <CreateListUser />;
+    default:
+      return <Dashboards />;
+  }
+}
 
 export default function Dashboard() {
-  const {info}   = useContext(Contexto);
+  const {info}   = useContexto();
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -247,7 +263,7 @@ export default function Dashboard() {
           }}
         >
           <Toolbar />
-        {info === 0 ? <Dashboards/> : info === 1 ? <ListUser/> : <CreateListUser/>}
+        {RenderContent()}
            
            {/*
                      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>

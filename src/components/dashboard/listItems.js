@@ -14,74 +14,124 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import List from '@mui/material/List';
 import StarBorder from '@mui/icons-material/StarBorder';
-import { Contexto } from '../../Contexto/Contexto';
-import { useContext } from 'react';
+import specieIcon from '../../media/specie.png';
+import { useContexto } from '../../Contexto/Contexto';
+import TodayTwoTone from '@mui/icons-material/TodayTwoTone';
+
+export const MainListItems = () => {
+
+  return (
+    <React.Fragment >
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Dashboard" icon  = {<DashboardIcon />}/>
+     </MenuContainer>
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Especies" icon  = {<img src= {specieIcon} alt="specie"/>}/>
+     </MenuContainer>
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Temporadas" icon  = {<TodayTwoTone />}/>
+     </MenuContainer>
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Reportes" icon  = { <BarChartIcon />}/>
+     </MenuContainer>
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Temas" icon  = {<LayersIcon />}/>
+     </MenuContainer>
+    
+      <MenuContainerCollapse title = "Usuarios" icon  = {<PeopleIcon />}>       
+             <MenuContainerCollapse.MenuCollapseItem title = "Lista de Usuario" icon  = { <StarBorder />} menu={1}/>      
+             <MenuContainerCollapse.MenuCollapseItem title = "CrearUsuario" icon  = { <StarBorder />} menu={2}/> 
+     </MenuContainerCollapse> 
+
+     <MenuContainer menu = {0}>
+       <MenuContainer.Item  title = "Ajustes" icon  = {<SettingsIcon />}/>
+     </MenuContainer>
+    
+    </React.Fragment>
+  );
+};
+
+function MenuContainer ({children,menu}){
+  const { oninfo } = useContexto();
+  return(
+    <>
+       <ListItemButton 
+       onClick={() => {
+         oninfo(menu);
+        }}
+       >
+        {children}
+       </ListItemButton>
+    </>
+  );
+}
 
 
-export const MainListItems  = () => {
-  const {setInfo} = useContext(Contexto);
+function MenuItem ({title,icon}){
+   return(
+    <>
+        <ListItemIcon>
+           {icon}
+        </ListItemIcon>
+        <ListItemText primary={title} />
+    </>
+   );
+}
 
-  const [open, setOpen] = useState(true);
+
+function MenuContainerCollapse ({children,title,icon}){
+
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
-  
-  return (
-    <React.Fragment>
-    <ListItemButton onClick={()=>{setInfo(0)}}>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Temas" />
-    </ListItemButton>
-    <ListItemButton onClick={handleClick}>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Gestión de usuarios" />
-      {open ? <ExpandLess /> : <ExpandMore />}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItemButton sx={{ pl : 4}} onClick={()=>{setInfo(1)}}> 
-            <ListItemIcon>
-              <StarBorder/>
-            </ListItemIcon>
-            <ListItemText primary="Lista de Usuario"/>
-          </ListItemButton>
-          <ListItemButton sx={{ pl : 4}} onClick={()=>{setInfo(2)}}>
-            <ListItemIcon>
-              <StarBorder/>
-            </ListItemIcon>
-            <ListItemText primary="CrearUsuario"/>
-          </ListItemButton>
 
-        </List>
-    </Collapse>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Informes" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-         <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Ajustes" />
-    </ListItemButton>
-  </React.Fragment>
+  return(
+    <>
+       <ListItemButton onClick={handleClick}>
+
+          <MenuItem title = {title} icon  = {icon}/>
+          {open ? <ExpandLess /> : <ExpandMore />}
+       </ListItemButton>
+
+       <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {children}
+         </List>
+      </Collapse>
+    </>
   );
+}
 
-};
+
+function MenuCollapseItem ({title,icon,menu}){
+  const { oninfo } = useContexto();
+   return(
+    
+        <ListItemButton
+            sx={{ pl: 4 }}
+            onClick={() => {
+             oninfo(menu);
+            }}
+          >
+        <ListItemIcon>
+           {icon}
+        </ListItemIcon>
+        <ListItemText primary={title} />
+          </ListItemButton>
+    
+   );
+}
+
+MenuContainer.Item = MenuItem;
+MenuContainerCollapse.MenuCollapseItem = MenuCollapseItem;
 
 
 

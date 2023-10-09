@@ -3,7 +3,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import Hero from './components/Hero';
 import Footer from './components/Footer'
 import Dashboard from './components/dashboard/DashBoard';
-import { Datos } from './Contexto/Contexto';
+import  Datos  from './Contexto/Contexto';
 import {
   BrowserRouter as Router,
   Routes,
